@@ -24,6 +24,12 @@ func TestNewErrorBadRequest(t *testing.T) {
 	fmt.Println(badRequest)
 }
 
+func TestNewErrorStrWithOptions(t *testing.T) {
+	err := fmt.Errorf("%s", "error test 400")
+	badRequest := NewErrorStrWithOptions(400, err.Error())
+	fmt.Println(badRequest)
+}
+
 func TestNewErrorUnauthorized(t *testing.T) {
 	err := fmt.Errorf("%s", "error test 401")
 	unauthorized := NewErrorUnauthorized(err)
