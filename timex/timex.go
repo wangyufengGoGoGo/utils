@@ -20,7 +20,7 @@ func HourDuration(interval int64) time.Duration {
 
 //After 当前时间在t之后
 func After(t time.Time) bool {
-	return time.Now().After(t)
+	return time.Now().Before(t)
 }
 
 //SecondAfter unix转换后时间加interval在当前时间之后

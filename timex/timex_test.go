@@ -40,14 +40,26 @@ func TestAfter(t *testing.T) {
 			t.Fatalf("parse time error: {%s}", err)
 		}
 
-		if !After(start) {
-			t.Fatalf("start should less than now")
+		if After(start) {
+			t.Log("start should more than now")
 		}
+		t.Log("start should less than now")
+	})
+	t.Run("当前时间之前(1657853331)", func(t *testing.T) {
+		start, err := time.Parse(TimeFormat, "2022-07-15 10:48:51")
+		if err != nil {
+			t.Fatalf("parse time error: {%s}", err)
+		}
+		if After(start) {
+			t.Log("start should more than now")
+		}
+		t.Log("start should less than now")
 	})
 	t.Run("当前时间之后", func(t *testing.T) {
 		if After(time.Now()) {
-			t.Fatalf("start should less than now")
+			t.Log("start should more than now")
 		}
+		t.Log("start should less than now")
 	})
 }
 
@@ -58,13 +70,13 @@ func TestSecondAfter(t *testing.T) {
 			t.Fatalf("parse time error: {%s}", err)
 		}
 
-		if !SecondAfter(start.Unix(), 60) {
-			t.Fatalf("start should less than now")
+		if SecondAfter(start.Unix(), 60) {
+			t.Fatalf("start less than now")
 		}
 	})
 	t.Run("当前时间之后", func(t *testing.T) {
-		if SecondAfter(time.Now().Unix(), 60) {
-			t.Fatalf("start should less than now")
+		if !SecondAfter(time.Now().Unix(), 60) {
+			t.Fatalf("start less than now")
 		}
 	})
 }
@@ -76,13 +88,13 @@ func TestMinuteAfter(t *testing.T) {
 			t.Fatalf("parse time error: {%s}", err)
 		}
 
-		if !MinuteAfter(start.Unix(), 60) {
-			t.Fatalf("start should less than now")
+		if MinuteAfter(start.Unix(), 60) {
+			t.Fatalf("start less than now")
 		}
 	})
 	t.Run("当前时间之后", func(t *testing.T) {
-		if MinuteAfter(time.Now().Unix(), 60) {
-			t.Fatalf("start should less than now")
+		if !MinuteAfter(time.Now().Unix(), 60) {
+			t.Fatalf("start less than now")
 		}
 	})
 }
@@ -94,13 +106,13 @@ func TestHourAfter(t *testing.T) {
 			t.Fatalf("parse time error: {%s}", err)
 		}
 
-		if !HourAfter(start.Unix(), 60) {
+		if HourAfter(start.Unix(), 60) {
 			t.Fatalf("start should less than now")
 		}
 	})
 	t.Run("当前时间之后", func(t *testing.T) {
-		if HourAfter(time.Now().Unix(), 60) {
-			t.Fatalf("start should less than now")
+		if !HourAfter(time.Now().Unix(), 60) {
+			t.Fatalf("start should more than now")
 		}
 	})
 }
@@ -112,13 +124,20 @@ func TestAfterByUnix(t *testing.T) {
 			t.Fatalf("parse time error: {%s}", err)
 		}
 
-		if !AfterByUnix(start.Unix(), 60*time.Second) {
-			t.Fatalf("start should less than now")
+		if AfterByUnix(start.Unix(), 60*time.Second) {
+			t.Fatalf("start less than now")
+		}
+	})
+	t.Run("当前时间之前(1657853331)", func(t *testing.T) {
+		//2022-07-15 10:48:51
+		unix := int64(1657853331)
+		if AfterByUnix(unix, 60*time.Second) {
+			t.Fatalf("start less than now")
 		}
 	})
 	t.Run("当前时间之后", func(t *testing.T) {
-		if AfterByUnix(time.Now().Unix(), 60*time.Second) {
-			t.Fatalf("start should less than now")
+		if !AfterByUnix(time.Now().Unix(), 60*time.Second) {
+			t.Fatalf("start less than now")
 		}
 	})
 }
