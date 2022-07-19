@@ -1,4 +1,4 @@
-package crypt
+package md5
 
 import (
 	"testing"

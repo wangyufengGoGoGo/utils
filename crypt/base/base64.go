@@ -1,4 +1,4 @@
-package crypt
+package base
 
 import (
 	"encoding/base32"

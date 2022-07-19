@@ -1,9 +1,14 @@
 package errorx
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
 	"os"
+)
+
+var (
+	ErrPaddingSize = errors.New("padding size error please check the secret key or iv")
 )
 
 type ErrOptions struct {
