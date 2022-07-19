@@ -5,7 +5,13 @@ import (
 	"fmt"
 )
 
-func GetMD5(data string) string {
+func GetMD5(data []byte) string {
+	hash := md5.New()
+	hash.Write(data)
+	return fmt.Sprintf("%x", hash.Sum([]byte(nil)))
+}
+
+func GetMD5ByString(data string) string {
 	hash := md5.New()
 	hash.Write([]byte(data))
 	return fmt.Sprintf("%x", hash.Sum([]byte(nil)))

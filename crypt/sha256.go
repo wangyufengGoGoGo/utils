@@ -10,3 +10,9 @@ func GetSha256(data []byte) string {
 	hash.Write(data)
 	return fmt.Sprintf("%x", hash.Sum(nil))
 }
+
+func GetSha256ByString(data string) string {
+	hash := sha256.New()
+	hash.Write([]byte(data))
+	return fmt.Sprintf("%x", hash.Sum(nil))
+}
