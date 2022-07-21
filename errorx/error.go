@@ -9,6 +9,7 @@ import (
 
 var (
 	ErrPaddingSize = errors.New("padding size error please check the secret key or iv")
+	ErrDataType    = errors.New("data type error")
 )
 
 type ErrOptions struct {
