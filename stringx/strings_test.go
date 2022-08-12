@@ -12,6 +12,7 @@ func TestSpliceString(t *testing.T) {
 		"test1": 1,
 		"test2": 1.1,
 		"test3": true,
+		"test5": "测试",
 	}
 
 	value := reflect.ValueOf(m)
@@ -23,11 +24,11 @@ func TestSpliceString(t *testing.T) {
 		fmt.Println(m[v.String()])
 	}
 
-	spliceString, err := JsonSpliceToString(m, "&")
+	spliceString, err := JsonSpliceToString(m, "&", true)
 	if err != nil {
 		t.Fatal(err)
 	}
-	expected := "test=aaa,bbb&test1=1&test2=1.1&test3=true"
+	expected := "test=aaa%2Cbbb&test1=1&test2=1.1&test3=true&test5=%E6%B5%8B%E8%AF%95"
 	if spliceString != expected {
 		t.Fatal(fmt.Sprintf("预期{%s}, 实际{%s}", expected, spliceString))
 	}
