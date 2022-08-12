@@ -3,11 +3,12 @@ package stringx
 import (
 	"fmt"
 	"github.com/wangyufengx/utils/errorx"
+	"net/url"
 	"reflect"
 	"sort"
 )
 
-func JsonSpliceToString(data any, seq string) (string, error) {
+func JsonSpliceToString(data any, seq string, escape bool) (string, error) {
 	var (
 		str    string
 		tmpStr string
@@ -24,6 +25,11 @@ func JsonSpliceToString(data any, seq string) (string, error) {
 			if err != nil {
 				return "", err
 			}
+
+			if escape {
+				tmpStr = url.QueryEscape(tmpStr)
+			}
+
 			str += fmt.Sprintf("%s=%v", v, tmpStr)
 			if k < len(keys)-1 {
 				str += fmt.Sprintf("%s", seq)
