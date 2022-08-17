@@ -1,4 +1,4 @@
-package constant
+package constantx
 
 const (
 	CompSurnameSize = 6
