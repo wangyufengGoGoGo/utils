@@ -15,6 +15,12 @@ golang utils
 ### arrays
 
 - func ContainsString(src []string, val string) bool
-  符串src是否包含val
+  字符串src是否包含val
 - 
 
+
+### stringx
+
+- func Join[T any](elems []T, sep string) string
+  拼接成字符串
+- 

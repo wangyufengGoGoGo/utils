@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+//Join 拼接成字符串
 func Join[T any](elems []T, sep string) string {
 	switch len(elems) {
 	case 0:
