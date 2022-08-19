@@ -1,6 +1,7 @@
 package stringx
 
 import (
+	"encoding/json"
 	"fmt"
 	"reflect"
 	"testing"
@@ -32,6 +33,43 @@ func TestSpliceString(t *testing.T) {
 	if spliceString != expected {
 		t.Fatal(fmt.Sprintf("预期{%s}, 实际{%s}", expected, spliceString))
 	}
+}
+
+func TestSliceToString(t *testing.T) {
+	m := map[string]any{
+		"test":  []string{"aaa", "bbb"},
+		"test1": 1,
+		"test2": 1.1,
+		"test3": true,
+		"test5": "测试",
+	}
+
+	bt, err := json.Marshal(m)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	tt := map[string]any{}
+
+	if err = json.Unmarshal(bt, &tt); err != nil {
+		t.Fatal(err)
+	}
+
+	str, err := SliceToString(tt["test"])
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(str)
+
+	spliceString, err := JsonSpliceToString(m, "&", true)
+	if err != nil {
+		t.Fatal(err)
+	}
+	expected := "test=aaa%2Cbbb&test1=1&test2=1.1&test3=true&test5=%E6%B5%8B%E8%AF%95"
+	if spliceString != expected {
+		t.Fatal(fmt.Sprintf("预期{%s}, 实际{%s}", expected, spliceString))
+	}
+
 }
 
 func TestBaseDataTypeToString(t *testing.T) {

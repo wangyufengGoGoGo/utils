@@ -78,6 +78,8 @@ func SliceToString(data any) (string, error) {
 		str = Join(data.([]string), ",")
 	case []int:
 		str = Join(data.([]int), ",")
+	case []any:
+		str = Join(data.([]any), ",")
 
 	}
 
